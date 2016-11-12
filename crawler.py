@@ -8,7 +8,11 @@ except ImportError:
 # regex
 link_re = re.compile(r'href="(.*?)"')
 
-def 
+def outputhandler(newurl):
+    urloutputfile = open("urlfetched.txt","a+")
+    for url in newurl:
+        urloutputfile.write(url+"\n")
+    urloutputfile.close()
 
 def crawl(url):
 
@@ -22,16 +26,18 @@ def crawl(url):
     links = link_re.findall(req.text)
 
     print("\nFound {} links".format(len(links)))
-
+    urls_fetched = list()
     # Search links for emails
     for link in links:
-
         # Get an absolute URL for a link
         link = urljoin(url, link)
-
-        print(link)
+        urls_fetched.append(str(link))
+        # print link
+    return urls_fetched
 
 if __name__ == '__main__':
     urlfile = open('urls.txt',"r")
+    urlbase = list()
     for url in urlfile:
-        crawl(url)
+        urlbase = crawl(url)
+    outputhandler(urlbase)
