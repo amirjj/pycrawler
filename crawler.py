@@ -8,6 +8,7 @@ except ImportError:
 # regex
 link_re = re.compile(r'href="(.*?)"')
 
+def 
 
 def crawl(url):
 
@@ -31,4 +32,6 @@ def crawl(url):
         print(link)
 
 if __name__ == '__main__':
-    crawl('https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=github%20python')
+    urlfile = open('urls.txt',"r")
+    for url in urlfile:
+        crawl(url)
